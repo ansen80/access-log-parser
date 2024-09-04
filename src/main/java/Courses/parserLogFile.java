@@ -22,7 +22,7 @@ public class parserLogFile {
             }
 
             validFileCount++;
-            System.out.println("Путь указан верно. Это файл номер " + validFileCount);
+            System.out.println("Путь указан верно. Это файл номер" + validFileCount);
         }
     }
 }
