@@ -9,7 +9,7 @@ public class startIF09 {
         if ( x == 6 || y == 6) {
             return true;
         }
-        if ( x - y == 6) {
+        if ( x - y == 6 || y - x == 6 ) {
             return true;
         }
         return false;
@@ -27,6 +27,10 @@ public class startIF09 {
         int x3 = 1;
         int y3 = 6;
         System.out.println("результат: " + magic6(x3,y3));
+
+        int x4 = 3;
+        int y4 = 9;
+        System.out.println("результат: " + magic6(x4,y4));
 
     }
 }
