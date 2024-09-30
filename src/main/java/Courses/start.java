@@ -13,7 +13,7 @@ public class start {
         double fractional = x - integer;
         fractional = Math.round(fractional * 1000) / 1000.0;
         return fractional;
-
     }
-
 }
+
+
