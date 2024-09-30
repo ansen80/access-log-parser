@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: text_length
+Main-Class: com.stepup.beginning.text_length

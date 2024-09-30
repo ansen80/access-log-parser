@@ -1,3 +1,5 @@
+package com.stepup.beginning;
+
 import java.util.Scanner;
 
 public class text_length {
