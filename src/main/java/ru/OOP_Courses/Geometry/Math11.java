@@ -1,7 +1,6 @@
 package ru.OOP_Courses.Geometry;
 
 public class Math11 {
-
     public static double sumAll(double... values) {
         double sum = 0.0;
         for (double value : values) {
