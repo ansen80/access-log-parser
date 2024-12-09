@@ -12,7 +12,7 @@ public class LogReader {
         String logFilePath = "C:/_git/AccessLogParser/access.log";
         try (BufferedReader br = new BufferedReader(new FileReader(logFilePath))) {
             String line;
-            String regex = "^(\\S+) \\S+ \\S+ \\[(.*?)\\] \"[^\"]*\" (\\d{3}) \\d+ \"[^\"]*\" \"([^\"]*)\"$";
+            String regex = "^(\\S+) \\S+ \\S+ \\[(.*?)] \"[^\"]*\" (\\d{3}) \\d+ \"[^\"]*\" \"([^\"]*)\"$";
             Pattern pattern = Pattern.compile(regex);
             while ((line = br.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line);
@@ -20,8 +20,8 @@ public class LogReader {
                     String ipAddress = matcher.group(1);
                     String userAgent = matcher.group(4);
                     int responseCode = Integer.parseInt(matcher.group(3));
-
-                    statistics.addEntry(userAgent, ipAddress, responseCode);
+                    String timestamp = matcher.group(2);
+                    statistics.addEntry(userAgent, ipAddress, responseCode, timestamp);
                 } else {
                     System.out.println("Не удалось разобрать строку: " + line);
                 }
@@ -31,8 +31,6 @@ public class LogReader {
         } catch (NumberFormatException e) {
             System.err.println("Ошибка при разборе кода ответа: " + e.getMessage());
         }
-        statistics.setLogHours(1);
-
         System.out.println("Среднее количество посещений в час: " + statistics.calculateAverageVisitsPerHour());
         System.out.println("Среднее количество ошибок в час: " + statistics.calculateAverageErrorsPerHour());
         System.out.println("Среднее количество посещений на пользователя: " + statistics.calculateAverageVisitsPerUser());
