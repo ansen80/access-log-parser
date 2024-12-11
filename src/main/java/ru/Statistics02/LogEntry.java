@@ -1,27 +1,27 @@
 package ru.Statistics02;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 class LogEntry {
     private String userAgentString;
     private String ipAddress;
     private int responseCode;
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss Z", Locale.ENGLISH);
     public LogEntry(String userAgentString, String ipAddress, int responseCode, String timestampString) {
         this.userAgentString = userAgentString;
         this.ipAddress = ipAddress;
         this.responseCode = responseCode;
         try {
-            this.timestamp = dateFormat.parse(timestampString);
-        } catch (ParseException e) {
-            this.timestamp = new Date();
+            this.timestamp = LocalDateTime.parse(timestampString, dateFormat);
+        } catch (Exception e) {
+            this.timestamp = LocalDateTime.now();
         }
     }
-    public Date getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
     public UserAgent getUserAgent() {

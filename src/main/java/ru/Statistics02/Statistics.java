@@ -1,5 +1,7 @@
 package ru.Statistics02;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,16 +12,18 @@ class Statistics {
         if (logEntries.isEmpty()) {
             return 0;
         }
-        Date minTime = logEntries.stream()
+        LocalDateTime minTime = logEntries.stream()
                 .map(LogEntry::getTimestamp)
-                .min(Date::compareTo)
-                .orElse(new Date());
+                .min(LocalDateTime::compareTo)
+                .orElse(LocalDateTime.now());
 
-        Date maxTime = logEntries.stream()
+        LocalDateTime maxTime = logEntries.stream()
                 .map(LogEntry::getTimestamp)
-                .max(Date::compareTo)
-                .orElse(new Date());
-        long durationMillis = maxTime.getTime() - minTime.getTime();
+                .max(LocalDateTime::compareTo)
+                .orElse(LocalDateTime.now());
+
+        Duration duration = Duration.between(minTime, maxTime);
+        long durationMillis = duration.toMillis();
         return durationMillis / (1000 * 60 * 60);
     }
     public void addEntry(String userAgentString, String ipAddress, int responseCode, String timestampString) {
